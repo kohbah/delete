@@ -1,26 +1,18 @@
----
-#doing this only on the ansible local host
-- hosts: localhost 
-  user: admin
-  tasks:
-    - name: 'downloading jfrog rmp'
-      get_url:
-       url: https://bintray.com/jfrog/artifactory-pro-rpms/download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm
-       dest: /var/lib/awx/projects/packages
-  
-    - name: 'downloading jfrog jdbc'
-      get_url:
-       url: https://jdbc.postgresql.org/download/postgresql-42.2.12.jar
-       dest: /var/lib/awx/projects/packages       
-       
+---       
 - hosts: artifactory
   user: ec2-user
   become: yes
   tasks:
-    - name: 'copying artifactory rpm package from ansible host'
-      copy:
-       src: /var/lib/awx/projects/packages
+    - name: 'downloading jfrog rmp'
+      get_url:
+       url: https://bintray.com/jfrog/artifactory-pro-rpms/download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm
        dest: /opt
+  
+    - name: 'downloading jfrog jdbc'
+      get_url:
+       url: https://jdbc.postgresql.org/download/postgresql-42.2.12.jar
+       dest: /opt      
+  
     - name: 'install artifactory rpm'
       yum:
        name: /opt/'download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm'
@@ -35,18 +27,10 @@
        dest: /opt/jfrog/artifactory/var/etc/
     - name: 'copying postgresql jdbc'
       copy:
-       src: /var/lib/awx/projects/packages/postgresql-42.2.12.jar
+       src: /opt/postgresql-42.2.12.jar
        dest: /opt/jfrog/artifactory/var/bootstrap/artifactory/tomcat/lib
        mode: 0766
-      
-      
-      
-      
-      
-      
-      
-      
-      
+           
       
       
       
