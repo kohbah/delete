@@ -23,7 +23,7 @@
        state: absent
     - name: 'copying new system.yaml file'
       copy:
-       src: /delete/system.yaml
+       src: ~/system.yaml
        dest: /opt/jfrog/artifactory/var/etc/
     - name: 'copying postgresql jdbc'
       copy:
