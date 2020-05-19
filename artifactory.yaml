@@ -1,0 +1,43 @@
+---
+#doing this only on the ansible local host
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: 'downloading jfrog rmp'
+      get_url:
+       url: https://bintray.com/jfrog/artifactory-pro-rpms/download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm
+       dest: /var/lib/awx/projects/packages
+       
+- hosts: artifactory
+  become: yes
+  tasks:
+    - name: 'copying artifactory rpm package from ansible host'
+      copy:
+       src: /var/lib/awx/projects/packages
+       dest: /opt
+    - name: 'install artifactory rpm'
+      yum:
+       name: /opt/'download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm'
+       state: present
+    - name: 'deleting system.yaml file'
+      file:
+       path: /opt/jfrog/artifactory/var/etc/system.yaml
+       state: absent
+    - name: 'copying new system.yaml file'
+      copy:
+       src: system.yaml
+       dest: /opt/jfrog/artifactory/var/etc/
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
