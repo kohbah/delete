@@ -1,6 +1,6 @@
 ---
 #doing this only on the ansible local host
-- hosts: localhost ansible_connection=local
+- hosts: localhost 
   become: yes
   tasks:
     - name: 'downloading jfrog rmp'
