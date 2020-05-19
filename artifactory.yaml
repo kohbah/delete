@@ -15,7 +15,7 @@
   
     - name: 'install artifactory rpm'
       yum:
-       name: /opt/'download_file?file_path=jfrog-artifactory-pro%2Fjfrog-artifactory-pro-7.4.3.rpm'
+       name: /opt/jfrog-artifactory-pro-7.4.3.rpm 
        state: present
     - name: 'deleting system.yaml file'
       file:
