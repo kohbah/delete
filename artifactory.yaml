@@ -23,7 +23,7 @@
        state: absent
     - name: 'copying new system.yaml file'
       copy:
-       src: {{playbook_dir}}/system.yaml
+       src: {{playbook_dir}}system.yaml
        dest: /opt/jfrog/artifactory/var/etc/
     - name: 'copying postgresql jdbc'
       copy:
